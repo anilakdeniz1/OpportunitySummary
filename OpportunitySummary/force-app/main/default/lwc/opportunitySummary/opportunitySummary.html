@@ -1,0 +1,58 @@
+<template>
+    <div class="card-header slds-text-align_center">
+
+        <div style="card-header-icon" >
+            <lightning-icon icon-name="standard:opportunity" size="medium" alternative-text="SLDS Icon"></lightning-icon>
+        </div>
+
+        <div class="slds-var-m-left_medium">
+            <span>
+                <h1>Opportunity Summary</h1>
+            </span>
+        </div>
+
+    </div>
+
+            <Lightning-modal-body>
+                <div class="slds-scrollable--y">
+                    <template for:each={opportunityData} for:item="data">
+                        <div key={data.Id} class="inner-card">
+                            <div class="inner-card-header">
+                                <lightning-icon icon-name={data.iconName} size="small" alternative-text="SLDS Icon"></lightning-icon>
+                                            
+                                <template lwc:if={data.clickable}>
+                                    <div class="inner-card-title">
+                                       <div>
+                                            <a href="#" data-record-id={data.recordId} onclick={navigateToRecord} data-object-api-name={data.objectApiName}>
+                                                <p>{data.link}</p>        
+                                            </a>
+
+                                            <p>{data.title}</p> 
+                                       </div>
+
+                                        <div>{data.date}</div>                              
+                                    </div>                     
+                                </template>
+
+                                <template lwc:else>
+                                    <div class="inner-card-title">
+                                        <div>
+                                            <p>{data.title}</p> 
+                                        </div>
+                                        <p>{data.date}</p>
+                                    </div>
+                                </template>
+                            
+                            </div>
+
+                            <template lwc:if={data.body}>
+                                <div class="inner-card-body">
+                                    {data.body}
+                                </div>
+                            </template>
+
+                        </div>
+                    </template>
+                </div>
+            </Lightning-modal-body>
+</template>
